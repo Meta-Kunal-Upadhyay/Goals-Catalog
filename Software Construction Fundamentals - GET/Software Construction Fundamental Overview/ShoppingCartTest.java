@@ -46,7 +46,7 @@ class Item {
     }
 
     @Override
-    public String toSt() {
+    public String toString() {
         return "ID: " + itemId + ", Name: " + name + ", Price: $" + price + ", Quantity: " + quantity + ", Desc: " + desc;
     }
 }
@@ -132,7 +132,7 @@ class ShoppingCart {
     }
 }
 
-public class ShoppingCart {
+public class ShoppingCartTest {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         ShoppingCart cart = new ShoppingCart();
@@ -164,17 +164,17 @@ public class ShoppingCart {
                     int itemId = sc.nextInt();
                     sc.nextLine();
                     System.out.println("Enter Item Name: ");
-                    string name = sc.nextLine();
+                    String name = sc.nextLine();
                     System.out.println("Enter Item Desc: ");
-                    string desc = sc.nextLine();
+                    String desc = sc.nextLine();
                     System.out.println("Enter Item Price: ");
-                    double name = sc.nextDouble();
+                    double price = sc.nextDouble();
                     System.out.println("Enter Item Quantity: ");
                     int quantity = sc.nextInt();
 
                     Item newItem = new Item(itemId, name, desc, price, quantity);
                     storeItems.put(itemId, newItem);
-                    System.out.println("New item added to the shop!!" + itemID);
+                    System.out.println("New item added to the shop!!" + itemId);
                     break;
                 
                 }
@@ -199,37 +199,37 @@ public class ShoppingCart {
         
                 case 3:
                     System.out.println("Enter Item ID to check quantity: ");
-                    int itemId = sc.nextInt();
-                    if(!storeItems.containsKey(itemId)){
+                    int itemId1 = sc.nextInt();
+                    if(!storeItems.containsKey(itemId1)){
                         System.out.println("Item not found");
                         break;
                     }
-                    Item item = storeItems.get(itemId);
-                    System.out.println("Quantity in cart: " + cart.displayQty(item));
+                    Item item12 = storeItems.get(itemId1);
+                    System.out.println("Quantity in cart: " + cart.displayQty(item12));
                     break;
         
                 case 4:
                     System.out.println("Enter Item ID to update quantity: ");
-                    int itemId = sc.nextInt();
-                    if(!storeItems.containsKey(itemId)){
+                    int itemId12 = sc.nextInt();
+                    if(!storeItems.containsKey(itemId12)){
                         System.out.println("Item not found");
                         break;
                     }
-                    Item item = storeItems.get(itemId);
+                    Item item13 = storeItems.get(itemId12);
                     System.out.println("Enter new quantity: ");
-                    int quantity = sc.nextInt();
-                    cart.updateQty(item, quantity);
+                    int quantity1 = sc.nextInt();
+                    cart.updateQty(item13, quantity1);
                     break;
                 
                 case 5: 
                     System.out.println("Enter Item ID to delete: ");
-                    int itemId = sc.nextInt();
-                    if(!storeItems.containsKey(itemId)){
+                    int itemId14 = sc.nextInt();
+                    if(!storeItems.containsKey(itemId14)){
                         System.out.println("Item not found");
                         break;
                     }
-                    Item item = storeItems.get(itemId);
-                    cart.deleteItem(item);
+                    Item item14 = storeItems.get(itemId14);
+                    cart.deleteItem(item14);
                     break;
 
                 case 6: 
@@ -242,8 +242,8 @@ public class ShoppingCart {
 
                 case 8: 
                     System.out.println("All Shop Items:");
-                    for(Item item : storeItems.value()) {
-                        System.out.println(item);
+                    for(Item item15 : storeItems.values()) {
+                        System.out.println(item15);
                     }
                     break;
 
