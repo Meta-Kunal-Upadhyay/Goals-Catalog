@@ -1,6 +1,11 @@
 import java.util.Scanner;
-
+import java.util.*;
 class JobScheduler {
+
+    public static void sortbyColumn(int a[][], int c){      
+            Arrays.sort(a, (x, y) -> Integer.compare(x[c],y[c]));  
+    }
+
     private int[][] processes;
     private int[] completionTime;
     private int[] waitingTime;
@@ -15,6 +20,11 @@ class JobScheduler {
         turnAroundTime = new int[n];
     }
 
+// AT  BT  CT  WT TAT
+// [0][10]  10  0 10 
+// [6][20]  30  4  24 
+// [60][10] 70  0  10   
+// [110][5] 115 0   5 
     public void execute() {
         int n = processes.length;
         int currentTime = 0;
@@ -68,22 +78,25 @@ class JobScheduler {
     }
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
        
         System.out.print("Enter number of processes: ");
-        int n = scanner.nextInt();
+        int n = sc.nextInt();
        
         int[][] processes = new int[n][2];
        
         for (int i = 0; i < n; i++) {
             System.out.print("Enter Arrival Time and Burst Time for Process " + (i + 1) + ": ");
-            processes[i][0] = scanner.nextInt();
-            processes[i][1] = scanner.nextInt();
+            processes[i][0] = sc.nextInt();
+            processes[i][1] = sc.nextInt();
         }
+        
+        JobScheduler s1 = new JobScheduler(processes);
+        s1.sortbyColumn(processes, 0);
+        // s1.sortbyColumn(processes, 1);
+        s1.execute();
        
-        JobScheduler scheduler = new JobScheduler(processes);
-        scheduler.execute();
-       
-        scanner.close();
+        sc.close();
     }
 }
+

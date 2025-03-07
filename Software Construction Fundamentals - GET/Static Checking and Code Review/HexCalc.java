@@ -15,7 +15,6 @@ class HexCalc {
                 digitValue = hexDigit - 'A' + 10; 
             }
 
-            System.out.println("The value " + digitValue);
             decimalValue = decimalValue * 16 + digitValue; 
         }
         return decimalValue;
@@ -24,13 +23,19 @@ class HexCalc {
     private static String decimalToHexa(int decimalValue) {
         if (decimalValue == 0) return "0";
     
-        StringBuilder hexStr = new StringBuilder();
+        String hexStr = "";
         while (decimalValue > 0) {
             int remainder = decimalValue % 16;
-            hexStr.insert(0, remainder < 10 ? (char) ('0' + remainder) : (char) ('A' + (remainder - 10)));
+            char hexDigit;
+            if (remainder < 10) {
+                hexDigit = (char) ('0' + remainder);
+            } else {
+                hexDigit = (char) ('A' + (remainder - 10));
+            }
+            hexStr =  hexDigit + hexStr;
             decimalValue /= 16;
         }
-        return hexStr.toString();
+        return hexStr;
     }
     
     public static String add(String hex1, String hex2) {
@@ -55,7 +60,7 @@ class HexCalc {
 
 
     public static boolean isEqual(String hex1, String hex2) {
-        return hex1.equalsIgnoreCase(hex2);
+        return hex1.equalsIgnoreCase(hex2); 
     }
 
     public static boolean isGreater(String hex1, String hex2) {
