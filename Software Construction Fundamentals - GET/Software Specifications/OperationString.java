@@ -28,6 +28,7 @@ class OperationString {
         int s = 0;
         int e = arr.length - 1;
 
+        // str.length - i - 1
         while(s < e){
             char temp = arr[s];
             arr[s] = arr[e];
@@ -58,7 +59,9 @@ class OperationString {
         int maxLen = 0;
         String maxStr = "";
         String curr = "";
-        
+        // "Hello Kunal  "
+            // 0123456789101112
+            // curr = "Kunal"
         for(int i = 0; i <= str1.length(); i++){
             if(i < str1.length() && str1.charAt(i) != ' '){
                 curr += str1.charAt(i);

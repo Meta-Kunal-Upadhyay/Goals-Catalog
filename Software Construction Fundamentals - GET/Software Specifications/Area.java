@@ -28,7 +28,7 @@ class Area {
         if (radius <= 0) {
             throw new ArithmeticException("Radius must be greater than zero.");
         }
-        return Math.PI * radius * radius;
+        return 3.14 * radius * radius;
     }
 
     

@@ -10,11 +10,7 @@ class Marksheet {
         this.totalStudents = grades.length;
     }
 
-    /**
-     * Calculates and returns the average of all grades.
-     * @return Average grade value (up to 2 decimal places).
-     * @throws ArithmeticException if the total number of students is zero.
-     */
+    
     public double getAverageGrade() throws ArithmeticException {
         if (totalStudents == 0) {
             throw new ArithmeticException("No students available to calculate average.");
@@ -27,16 +23,12 @@ class Marksheet {
         return Math.round((sum / (double) totalStudents) * 100.0) / 100.0;
     }
 
-    /**
-     * Finds and returns the maximum grade.
-     * @return Maximum grade value.
-     * @throws ArithmeticException if no students are available.
-     */
+    
     public int getMaximumGrade() throws ArithmeticException {
         if (totalStudents == 0) {
             throw new ArithmeticException("No students available to find maximum grade.");
         }
-
+        
         int maxGrade = grades[0];
         for (int grade : grades) {
             if (grade > maxGrade) {
@@ -46,11 +38,7 @@ class Marksheet {
         return maxGrade;
     }
 
-    /**
-     * Finds and returns the minimum grade.
-     * @return Minimum grade value.
-     * @throws ArithmeticException if no students are available.
-     */
+    
     public int getMinimumGrade() throws ArithmeticException {
         if (totalStudents == 0) {
             throw new ArithmeticException("No students available to find minimum grade.");
@@ -65,11 +53,7 @@ class Marksheet {
         return minGrade;
     }
 
-    /**
-     * Calculates and returns the percentage of students who passed (grade >= 40).
-     * @return Percentage of students passed (up to 2 decimal places).
-     * @throws ArithmeticException if no students are available.
-     */
+    
     public double getPassPercentage() throws ArithmeticException {
         if (totalStudents == 0) {
             throw new ArithmeticException("No students available to calculate pass percentage.");
@@ -121,6 +105,8 @@ class Marksheet {
 
         Marksheet marksheet = new Marksheet(grades);
         marksheet.displayResults();
+
+
 
         sc.close();
     }
