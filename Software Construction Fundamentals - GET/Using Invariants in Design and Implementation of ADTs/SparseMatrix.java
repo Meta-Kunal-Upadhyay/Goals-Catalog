@@ -54,7 +54,7 @@ final class SparseMatrix {
 
     public int[][] isAddition(int[][] mat1, int[][] mat2){
         int[][] res = new int[3][3];
-        System.out.println(mat1[0].length);
+        // System.out.println(mat1[0].length);
 
         for(int i = 0; i < mat1[0].length; i++){
             res[(mat1[0][i])][(mat1[1][i])] = mat1[2][i];
