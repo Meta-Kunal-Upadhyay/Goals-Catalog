@@ -33,7 +33,7 @@ class nQueen{
     }
 
     public boolean NQueen(int[][] board, int col, int dimenation) {
-        if(col == dimenation) return true;
+        if(col >= dimenation) return true;
 
         for (int row = 0; row < dimenation; row++) {
             if (isSafe(board, row, col, dimenation)) {
@@ -54,3 +54,5 @@ class nQueen{
         System.out.println("n queue: " + s.NQueen(board, 0, 4));
     }
 }
+
+    

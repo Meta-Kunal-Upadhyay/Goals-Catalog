@@ -24,6 +24,7 @@ class PayrollTest {
         organization.addDepartment(devDept);
         organization.addDepartment(manDept);
 
+
         // Process payroll
         Payroll.processPayroll(organization);
     }

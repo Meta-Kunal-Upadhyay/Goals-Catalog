@@ -1,0 +1,27 @@
+
+
+Normalization is a process used in database design to eliminate data redundancy and inconsistency by organizing data into structured tables. It involves breaking large tables into smaller ones and defining relationships between them.
+Normalization follows a series of steps called normal forms (NF):
+1. First Normal Form (1NF)
+Rules:
+Each column must have atomic values.
+Each row must have a unique identifier (Primary Key).
+No repeating groups or multivalued attributes.
+
+2. Second Normal Form (2NF)
+Rules:
+The table must be in 1NF.
+Remove partial dependencies (non-key attributes must depend on the entire primary key not part of it).
+
+3. Third Normal Form (3NF)
+Rules:
+The table must be in 2NF.
+Remove transitive dependencies (non-key attributes should depend only on the primary key not another non-key attribute).
+
+4. Boyce-Codd Normal Form (BCNF)
+Rules:
+The table must be in 3NF.
+Every determinant (a column that uniquely determines another column) must be a candidate key.
+
+
+
