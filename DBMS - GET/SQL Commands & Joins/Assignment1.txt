@@ -1,0 +1,147 @@
+-- Create the database 
+
+CREATE DATABASE STOREFRONT;
+
+-- To Use the database
+
+USE STOREFRONT; 
+
+
+-- Create Categories Table
+
+CREATE TABLE Categories (
+    category_id INT AUTO_INCREMENT PRIMARY KEY,
+    category_name VARCHAR(255) NOT NULL,
+    parent_category_id INT,
+    FOREIGN KEY (parent_category_id) REFERENCES Categories(category_id) -- Nested categories,               
+    category_description VARCHAR(1000)
+);
+
+-- Create Products Table
+
+CREATE TABLE Products (
+    product_id INT AUTO_INCREMENT PRIMARY KEY,
+    product_name VARCHAR(255) NOT NULL,
+    price DECIMAL(10, 2) NOT NULL,
+    stock_quantity INT NOT NULL,
+    description TEXT,
+    date_added DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+
+
+-- Create Product_Categories Table (Many-to-Many relationship between Products and Categories)
+
+CREATE TABLE Product_Categories (
+    product_id INT,
+    category_id INT,
+    PRIMARY KEY (product_id, category_id),
+    FOREIGN KEY (product_id) REFERENCES Products(product_id) ON DELETE CASCADE,
+    FOREIGN KEY (category_id) REFERENCES Categories(category_id) ON DELETE CASCADE
+);
+
+
+
+-- Create Product_Images Table (One-to-Many relationship between Products and Images)
+
+CREATE TABLE Product_Images (
+    image_id INT AUTO_INCREMENT PRIMARY KEY,
+    product_id INT,
+    image_url VARCHAR(255) NOT NULL,
+    FOREIGN KEY (product_id) REFERENCES Products(product_id) ON DELETE CASCADE
+);
+
+
+-- Create Users Table (For both Shopper and Administrator)
+
+CREATE TABLE Users (
+    user_id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    user_role ENUM('Shopper', 'Administrator') NOT NULL
+);
+
+
+-- Create Shipping Addresses Table
+
+CREATE TABLE Shipping_Addresses (
+    address_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    address_line1 VARCHAR(255) NOT NULL,
+    address_line2 VARCHAR(255),
+    city VARCHAR(100) NOT NULL,
+    state VARCHAR(100) NOT NULL,
+    zip_code VARCHAR(20) NOT NULL,
+    country VARCHAR(100) NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE CASCADE
+);
+
+
+-- Create Orders Table
+
+CREATE TABLE Orders (
+    order_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    order_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+    total_amount DECIMAL(10, 2) NOT NULL,
+    shipping_address_id INT,
+    order_status ENUM('Pending', 'Shipped', 'Canceled', 'Returned') NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES Users(user_id),
+    FOREIGN KEY (shipping_address_id) REFERENCES Shipping_Addresses(address_id)
+);
+
+
+
+-- Create Order_Items Table (One-to-Many relationship between Orders and Products)
+
+CREATE TABLE Order_Items (
+    order_item_id INT AUTO_INCREMENT PRIMARY KEY,
+    order_id INT,
+    product_id INT,
+    quantity INT NOT NULL,
+    price DECIMAL(10, 2) NOT NULL,
+    FOREIGN KEY (order_id) REFERENCES Orders(order_id) ON DELETE CASCADE,
+    FOREIGN KEY (product_id) REFERENCES Products(product_id) ON DELETE CASCADE
+);
+
+
+
+2. SQL Command to Display All Table Names in the StoreFront Database
+
+SHOW TABLES;
+
+
+3. SQL Command to Remove the `Product` Table
+
+DROP TABLE IF EXISTS Products;
+
+
+4. SQL Command to Recreate the `Product` Table
+
+-- Recreate the Product Table
+CREATE TABLE Products (
+    product_id INT AUTO_INCREMENT PRIMARY KEY,
+    product_name VARCHAR(255) NOT NULL,
+    price DECIMAL(10, 2) NOT NULL,
+    stock_quantity INT NOT NULL,
+    description TEXT,
+    date_added DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+
+
+1. Tables Created:
+   - `Categories`: To store product categories. This table supports nested categories (parent-child relationship).
+   - `Products`: Stores the details of products such as name, price, stock quantity, etc.
+   - `Product_Categories`: A junction table to support the many-to-many relationship between products and categories.
+   - `Product_Images`: To store the URLs of images related to products.
+   - `Users`: Stores the user details, including their role as either `Shopper` or `Administrator`.
+   - `Shipping_Addresses`: Stores multiple shipping addresses for users.
+   - `Orders`: Stores orders placed by shoppers with references to users and shipping addresses.
+   - `Order_Items`: Contains items within an order (relationship between orders and products).
+
+2. Commands to View and Modify Tables:
+   - `SHOW TABLES;`: Displays the list of all tables in the current database.
+   - `DROP TABLE IF EXISTS Products;`: Removes the `Products` table if it exists.
+   -  Recreate the `Products` table after it is dropped.

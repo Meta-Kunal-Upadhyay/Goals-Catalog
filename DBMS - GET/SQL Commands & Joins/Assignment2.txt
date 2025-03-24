@@ -1,0 +1,157 @@
+
+
+1. Insert Sample Data into StoreFront Tables
+
+
+-- Inserting Sample Data into Categories
+
+INSERT INTO Categories (category_name, parent_category_id) 
+VALUES
+('Electronics', NULL), -- Top Category
+('Mobile', 1), -- Sub-category under Electronics
+('Laptops', 1), -- Sub-category under Electronics
+('Smartphones', 2), -- Sub-category under Mobile
+('Tablets', 2); -- Sub-category under Mobile
+
+
+-- Inserting Sample Data into Products
+
+INSERT INTO Products (product_name, price, stock_quantity, description, date_added)
+VALUES
+('iPhone 13', 999.99, 100, 'Latest iPhone with A15 chip', NOW()),
+('Samsung Galaxy S21', 899.99, 50, 'Flagship Samsung Galaxy phone', NOW()),
+('MacBook Pro', 1999.99, 30, 'Apple MacBook Pro with M1 chip', NOW()),
+('iPad Air', 649.99, 20, 'Apple tablet with A14 Bionic chip', NOW()),
+('Xiaomi Mi 11', 749.99, 60, 'Flagship Xiaomi phone', NOW());
+
+
+-- Inserting Sample Data into Product_Images
+
+INSERT INTO Product_Images (product_id, image_url)
+VALUES
+(1, 'https://example.com/images/iphone13.jpg'),
+(2, 'https://example.com/images/galaxys21.jpg'),
+(3, 'https://example.com/images/macbookpro.jpg'); 
+
+
+-- Inserting Sample Data into Users (Shopper and Administrator)
+
+INSERT INTO Users (username, password, email, user_role)
+VALUES
+('john_doe', 'password123', 'john@example.com', 'Shopper'),
+('admin', 'adminpass', 'admin@example.com', 'Administrator');
+
+
+-- Inserting Sample Data into Shipping_Addresses
+
+INSERT INTO Shipping_Addresses (user_id, address_line1, address_line2, city, state, zip_code, country)
+VALUES
+(1, '123 Main St', 'Apt 101', 'New York', 'NY', '10001', 'USA'),
+(1, '456 Oak Rd', 'Suite 200', 'Los Angeles', 'CA', '90001', 'USA');
+
+
+-- Inserting Sample Data into Orders
+
+INSERT INTO Orders (user_id, total_amount, order_status, shipping_address_id)
+VALUES
+(1, 1849.98, 'Pending', 1); -- Order for iPhone 13 and Samsung Galaxy S21
+
+
+-- Inserting Sample Data into Order_Items
+
+INSERT INTO Order_Items (order_id, product_id, quantity, price)
+VALUES
+(1, 1, 1, 999.99),
+(1, 2, 1, 899.99);
+
+
+
+2. Display Id, Title, Category Title, Price of Active Products with Recently Added Products on Top
+
+
+SELECT 
+    p.product_id AS Id, 
+    p.product_name AS Title, 
+    c.category_name AS Category_Title, 
+    p.price
+FROM Products p
+JOIN Product_Categories pc ON p.product_id = pc.product_id
+JOIN Categories c ON pc.category_id = c.category_id
+WHERE p.stock_quantity > 0
+ORDER BY p.date_added DESC;
+
+
+3. Display the List of Products Which Don't Have Any Images
+
+SELECT 
+    p.product_id AS Id, 
+    p.product_name AS Title
+FROM Products p
+LEFT JOIN Product_Images pi ON p.product_id = pi.product_id
+WHERE pi.image_id IS NULL;
+
+
+
+4. Display All Id, Title, and Parent Category Title for All Categories Listed, Sorted by Parent Category Title and Then Category Title
+
+
+SELECT 
+    c.category_id AS Id, 
+    c.category_name AS Title, 
+    IFNULL(pc.category_name, 'Top Category') AS Parent_Category_Title
+FROM Categories c
+LEFT JOIN Categories pc ON c.parent_category_id = pc.category_id
+ORDER BY Parent_Category_Title, c.category_name;
+
+
+5. Display Id, Title, and Parent Category Title of All Leaf Categories (Categories Which Are Not Parent of Any Other Category)
+
+SELECT 
+    c.category_id AS Id, 
+    c.category_name AS Title, 
+    IFNULL(pc.category_name, 'Top Category') AS Parent_Category_Title
+FROM Categories c
+LEFT JOIN Categories pc ON c.parent_category_id = pc.category_id
+WHERE NOT EXISTS (SELECT 1 FROM Categories c2 WHERE c2.parent_category_id = c.category_id)
+ORDER BY Parent_Category_Title, c.category_name;
+
+
+6. Display Product Title, Price & Description Which Falls into a Particular Category Title (e.g., "Mobile")
+
+SELECT 
+    p.product_name AS Title, 
+    p.price, 
+    p.description
+FROM Products p
+JOIN Product_Categories pc ON p.product_id = pc.product_id
+JOIN Categories c ON pc.category_id = c.category_id
+WHERE c.category_name = 'Mobile';
+
+
+7. Display the List of Products Whose Quantity on Hand (Inventory) is Under 50
+
+
+SELECT 
+    p.product_id AS Id, 
+    p.product_name AS Title, 
+    p.stock_quantity AS Inventory
+FROM Products p
+WHERE p.stock_quantity < 50;
+
+
+Explanation of Each Query:
+
+1. Insert Sample Data**: The data insertion creates categories, products, users, and related records. Products like "iPhone 13" and "MacBook Pro" are added, and some products are linked to images.
+
+2. Display Active Products**: This query selects products that are in stock, ordered by the date they were added, with the most recent ones at the top.
+
+3. Display Products Without Images**: A `LEFT JOIN` is used to find products that do not have an associated image, i.e., where the `image_id` is `NULL`.
+
+4. Categories with Parent Category Title**: This retrieves categories and their respective parent categories. If a category has no parent, "Top Category" is displayed.
+
+5. Leaf Categories**: This query finds categories that are not parents of any other category (i.e., they have no child categories).
+
+6. Products in a Specific Category (Mobile)**: This retrieves the details of products that belong to a category, such as "Mobile". It joins `Products`, `Product_Categories`, and `Categories` tables.
+
+7. Products with Low Inventory**: This query selects products whose stock quantity is below 50.
+

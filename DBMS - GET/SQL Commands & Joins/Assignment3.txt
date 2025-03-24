@@ -1,0 +1,70 @@
+
+1. Display Recent 50 Orders (Id, Order Date, Order Total)
+
+
+Select od.order_id, od.order_date, od.total_amount
+From Orders od 
+Order by od.order_date 
+DESC LIMIT 50;
+
+
+2. Display 10 Most Expensive Orders
+
+SELECT o.order_id AS Id, o.order_date AS Order_Date, o.total_amount AS Order_Total
+FROM Orders o 
+ORDER BY o.total_amount DESC
+LIMIT 10;
+
+
+3. Display all the Orders which are placed more than 10 days old and one or more items from those orders are still not shipped.
+
+SELECT o.order_id AS Id, o.order_date AS Order_Date, o.total_amount AS Order_Total
+FROM Orders o 
+JOIN Order_Items oi ON o.order_id = oi.order_id
+WHERE o.order_date < NOW() - INTERVAL 10 DAY AND o.order_status != 'Shipped';
+
+
+
+4. Display List of Shoppers Who Haven't Ordered Anything Since Last Month
+
+SELECT u.user_id, u.username, u.email
+FROM Users u 
+LEFT JOIN Orders o ON u.user_id = o.user_id
+WHERE u.user_role = 'Shopper' AND (o.order_date IS NULL OR o.order_date < NOW() - INTERVAL 1 MONTH);
+
+
+
+5. Display List of Shoppers Along with Orders Placed by Them in the Last 15 Days
+
+SELECT u.user_id, u.username, u.email, o.order_id, o.order_date 
+FROM Users u 
+JOIN Orders o ON u.user_id = o.user_id
+WHERE u.user_role = 'Shopper' AND o.order_date > NOW() - INTERVAL 15 DAY;
+
+
+
+6. Display List of Order Items Which Are in "Shipped" State for a Particular Order Id (e.g., 1020)
+
+SELECT oi.order_item_id AS Item_Id, oi.product_id, oi.quantity, oi.price, o.order_status AS Status 
+FROM Order_Items oi
+JOIN orders o ON oi.order_id = o.order_id  
+WHERE o.order_id = 1 AND o.order_status = 'Shipping';
+
+6. Display List of Order Items Along with Order Placed Date Which Fall Between Rs 20 to Rs 50 Price
+
+SELECT oi.order_item_id AS Item_Id, oi.order_id, oi.product_id, oi.quantity, oi.price, o.order_date AS Order_Placed_Date 
+FROM Order_Items oi 
+JOIN Orders o ON oi.order_id = o.order_id 
+WHERE oi.price BETWEEN 20 AND 50;
+
+
+
+Explanation:
+
+1. Display Recent 50 Orders: This query retrieves the 50 most recent orders, sorted by the order date in descending order.   
+2. Display 10 Most Expensive Orders: This query retrieves the top 10 orders based on the highest total amount, sorted in descending order.
+3. Display Orders Older Than 10 Days with Unshipped Items: It selects orders older than 10 days, where at least one item is still in the "Not Shipped" state.
+4. Display Shoppers Who Haven't Ordered in the Last Month: This query lists shoppers who have not placed any orders in the last month.
+5. Display Shoppers with Orders in the Last 15 Days: This query shows the shoppers and their orders placed in the last 15 days.
+6. Display Shipped Items for a Specific Order: This query fetches order items in the "Shipped" state for a specific order ID (`1020` in this case).
+7. Display Items with Prices Between Rs 20 to Rs 50: This query lists order items that are priced between Rs 20 and Rs 50, along with the date the order was placed.

@@ -1,7 +1,9 @@
 
 
 Normalization is a process used in database design to eliminate data redundancy and inconsistency by organizing data into structured tables. It involves breaking large tables into smaller ones and defining relationships between them.
+
 Normalization follows a series of steps called normal forms (NF):
+
 1. First Normal Form (1NF)
 Rules:
 Each column must have atomic values.
