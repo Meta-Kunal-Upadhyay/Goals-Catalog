@@ -106,8 +106,8 @@ class Marksheet {
         Marksheet marksheet = new Marksheet(grades);
         marksheet.displayResults();
 
-
-
         sc.close();
+
+
     }
 }

@@ -1,0 +1,149 @@
+1. Categories Table:
+
+category_id: 
+	NOT NULL, 
+	UNIQUE
+
+category_name: 
+	NOT NULL UNIQUE (to prevent duplicate category names) 
+	LENGTH(category_name) <= 255
+
+parent_category_id:
+	NULLABLE
+	Must reference an existing category_id if not null
+	Self-referencing constraint to allow nested categories
+
+
+2. Products Table:
+
+product_id: 
+	NOT NULL, 
+	UNIQUE
+
+product_name:
+	NOT NULL
+	LENGTH(product_name) <= 255
+
+price:
+	NOT NULL
+	CHECK constraint: price >= 0
+
+stock_quantity:
+	NOT NULL
+	CHECK constraint: stock_quantity >= 0
+
+date_added:
+	DEFAULT to current timestamp
+	Cannot be in the future
+
+
+3. Product_Categories Table:
+
+	Composite PRIMARY KEY (product_id, category_id)
+	Both foreign keys must reference existing Products and Categories
+	No duplicate combinations allowed
+
+
+4. Product_Images Table:
+
+image_id: 
+	NOT NULL, 
+	UNIQUE
+
+product_id:
+	NOT NULL
+	Must reference an existing product
+
+image_url:
+	NOT NULL
+	UNIQUE (to prevent duplicate image URLs)
+	LENGTH(image_url) <= 255
+	Could add a CHECK constraint for valid URL format
+
+
+5.Users Table:
+
+user_id: 
+	NOT NULL, 
+	UNIQUE
+
+username:
+	NOT NULL
+	UNIQUE
+	LENGTH(username) BETWEEN 3 AND 255
+
+email:
+	NOT NULL
+	UNIQUE
+	Valid email format constraint
+
+password:
+	NOT NULL
+	Minimum length constraint (e.g., at least 8 characters)
+
+user_role: 
+	ENUM restricted to 'Shopper' or 'Administrator'
+
+
+
+6. Shipping_Addresses Table:
+
+address_id: 
+	NOT NULL, 
+	UNIQUE
+
+user_id:
+	NOT NULL
+	Must reference an existing user
+
+Address fields:
+	Required fields (address_line1, city, state, zip_code, country)
+	LENGTH constraints on each field
+
+
+7. Orders Table:
+
+order_id: 
+	NOT NULL, 
+	UNIQUE
+
+user_id:
+	NOT NULL
+	Must reference an existing user
+
+total_amount:
+	NOT NULL
+	CHECK constraint: total_amount >= 0
+
+shipping_address_id:
+	NOT NULL
+	Must reference an existing shipping address
+
+order_status: 
+	ENUM restricted to 'Pending', 'Shipped', 'Canceled', 'Returned'
+
+order_date: 
+	DEFAULT to current timestamp
+
+
+8. Order_Items Table:
+
+order_item_id: 
+	NOT NULL, 
+	UNIQUE
+
+order_id:
+	NOT NULL
+	Must reference an existing order
+
+product_id:
+	NOT NULL
+	Must reference an existing product
+
+quantity:
+	NOT NULL
+	CHECK constraint: quantity > 0
+
+price:
+	NOT NULL
+	CHECK constraint: price >= 0

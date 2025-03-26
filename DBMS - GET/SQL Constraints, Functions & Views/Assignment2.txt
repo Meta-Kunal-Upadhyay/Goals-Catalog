@@ -1,0 +1,55 @@
+1. Products in More Than One Category
+SELECT
+    p.product_id,
+    p.product_name,
+    COUNT(pc.category_id) AS category_count
+FROM
+    Products p
+JOIN
+    Product_Categories pc ON p.product_id = pc.product_id
+GROUP BY
+    p.product_id, p.product_name
+HAVING
+    category_count > 1
+ORDER BY
+    category_count DESC;
+
+
+2. Product Count by Price Range
+
+SELECT
+    CASE
+        WHEN price BETWEEN 0 AND 100 THEN '0 - 100'
+        WHEN price BETWEEN 101 AND 500 THEN '101 - 500'
+        ELSE 'Above 500'
+    END AS price_range,
+    COUNT(*) AS product_count
+FROM
+    Products
+GROUP BY
+    CASE
+        WHEN price BETWEEN 0 AND 100 THEN '0 - 100'
+        WHEN price BETWEEN 101 AND 500 THEN '101 - 500'
+        ELSE 'Above 500'
+    END
+ORDER BY
+    CASE price_range
+        WHEN '0 - 100' THEN 1
+        WHEN '101 - 500' THEN 2
+        ELSE 3
+    END;
+
+
+3. Categories with Product Count
+
+SELECT
+    c.category_name,
+    COUNT(pc.product_id) AS product_count
+FROM
+    Categories c
+LEFT JOIN
+    Product_Categories pc ON c.category_id = pc.category_id
+GROUP BY
+    c.category_id, c.category_name
+ORDER BY
+    product_count DESC;
