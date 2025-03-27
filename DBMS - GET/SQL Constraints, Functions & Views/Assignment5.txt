@@ -1,0 +1,37 @@
+1. Create View for Order Information (Last 60 Days)
+
+CREATE OR REPLACE VIEW OrderInformationView AS
+Select o.order_id as ID, p.product_name as Title, p.product_id as ProductID, p.price as Price, 
+u.username as ShopperName, u.email as Email, 
+o.order_date as OrderDate, o.order_status as OrderStatus
+from orders o
+Join users u on u.user_id = o.user_id
+Join order_items oi on o.order_id = oi.order_id
+Join products p on oi.product_id = p.product_id
+where o.order_date >= DATE_SUB(CURRENT_DATE, INTERVAL 60 DAY)
+group by ID, Title, ProductID, Price, ShopperName, Email, OrderDate, OrderStatus
+Order by o.order_date DESC;
+
+
+
+2. Query to Display Products in 'Shipped' State
+
+SELECT DISTINCT
+    Title,
+    Price
+FROM
+    OrderInformationView
+WHERE
+    OrderStatus = 'Shipped';
+
+
+-- 3. Top 5 Most Selling Products
+SELECT DISTINCT
+    Title,
+    Price,
+    COUNT(ProductID) as productCount
+FROM
+    OrderInformationView
+Group by Title, Price    
+order by productCount DESC
+LIMIT 5;
