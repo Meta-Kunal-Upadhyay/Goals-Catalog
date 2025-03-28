@@ -1,0 +1,11 @@
+Indexing columns in Order, Product, and Category tables
+
+
+-- Indexing frequently used columns for better performance  
+
+CREATE INDEX idx_order_date ON Orders(order_date);  
+CREATE INDEX idx_order_status ON Orders(order_status);  
+CREATE INDEX idx_product_id ON Order_Items(product_id);  
+CREATE INDEX idx_category_id ON Categories(category_id);  
+CREATE INDEX idx_parent_category ON Categories(parent_category_id); 
+
