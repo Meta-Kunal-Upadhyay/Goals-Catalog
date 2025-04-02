@@ -1,3 +1,10 @@
+
+class ListNode {
+    int val;
+    ListNode next;
+    ListNode(int val) { this.val = val; this.next = null; }
+}
+
 public class RotateSubList {
     private static void printList(ListNode head) {
         while (head != null) {
@@ -40,10 +47,16 @@ public class RotateSubList {
         }
         
         k = k % len;
-        if (k == 0) return head;
+    
+        if (k == 0){
+             return head;
+        }
         
         ListNode prev = head;
-        for (int i = 0; i < len - k - 1; i++) prev = prev.next;
+        for (int i = 0; i < len - k - 1; i++) {
+            prev = prev.next;
+        }
+            
         
         ListNode newHead = prev.next;
         prev.next = null;
@@ -60,8 +73,9 @@ public class RotateSubList {
         head.next.next.next = new ListNode(5);
         head.next.next.next.next = new ListNode(6);
         head.next.next.next.next.next = new ListNode(7);
+        printList(head);
         
-        head = rotateSublist(head, 2, 5, 2);
+        head = rotateSublist(head, 2, 5, 8);
         printList(head);
     }
 }

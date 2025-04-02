@@ -1,4 +1,4 @@
-import java.util.*;
+
 class ListNode {
     int val;
     ListNode next;
@@ -33,7 +33,8 @@ public class DetectLoopInLinkedList {
     
     public static void main(String[] args) {
 
-        Scanner sc = new Scanner(System.in);
+        // Scanner sc = new Scanner(System.in);
+
         ListNode head = new ListNode(2);
         head.next = new ListNode(3);
         head.next.next = new ListNode(4);
@@ -42,10 +43,12 @@ public class DetectLoopInLinkedList {
         head.next.next.next.next.next = new ListNode(7);
         printList(head);
         
-        head.next.next.next.next.next = head.next;
+        // head.next.next.next.next.next = head.next;
         System.out.println("Loop detected: " + detectLoop(head));
         
     }
     
     
 }
+
+
