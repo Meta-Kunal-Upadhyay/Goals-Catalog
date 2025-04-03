@@ -2,29 +2,37 @@ import java.util.*;
 
 public class InfixEvaluator {
 
+    public static int poww(int a, int b){
+        double c = (double) a;
+        double d = (double) b;
+        return (int) (Math.pow(c,d));
+    }
+
     // Define operator precedence and associativity
     public static final Map<String, Integer> precedence = new HashMap<>();
     public static final Map<String, String> associativity = new HashMap<>();
 
     static {
-        precedence.put("(", 0);
-        precedence.put(")", 0);
-        precedence.put("!", 4); // unary NOT operator
+        precedence.put("!", 5);
+        precedence.put("^", 4); // unary NOT operator
         precedence.put("*", 3);
         precedence.put("/", 3);
         precedence.put("+", 2);
         precedence.put("-", 2);
-        precedence.put("==", 1);
-        precedence.put("!=", 1);
         precedence.put("<", 1);
         precedence.put(">", 1);
         precedence.put("<=", 1);
         precedence.put(">=", 1);
+        precedence.put("==", 1);
+        precedence.put("!=", 1);
         precedence.put("&&", 0);
         precedence.put("||", 0);
+        precedence.put("(", 6);
+        precedence.put(")", 6);
 
         // Associativity: LEFT or RIGHT
         associativity.put("!", "RIGHT");
+        associativity.put("^", "LEFT");
         associativity.put("*", "LEFT");
         associativity.put("/", "LEFT");
         associativity.put("+", "LEFT");
@@ -40,23 +48,42 @@ public class InfixEvaluator {
     }
 
     // Tokenize the expression into meaningful parts (numbers, operators, parentheses)
-    public static List<String> tokenize(String expression) {
-        List<String> tokens = new ArrayList<>();
-        // String regex = "(\\d+|==|!=|<=|>=|&&|\\|\\||[()\\+\\-\\*/<>!])";
+    // public static List<String> tokenize(String expression) {
+    //     List<String> tokens = new ArrayList<>();
+    //     // String regex = "(\\d+|==|!=|<=|>=|&&|\\|\\||[()\\+\\-\\*/<>!])";
 
-        // Using regex to match numbers and operators
-        Scanner sc = new Scanner(expression);
-        sc.useDelimiter("\\s*");
+    //     // Using regex to match numbers and operators
+    //     Scanner sc = new Scanner(expression);
+    //     sc.useDelimiter("\\s*");
         
-        while (sc.hasNext()) {
-            String part = sc.next().trim();
-            if (part.matches("\\d+")) { // Numbers
-                tokens.add(part);
-            } else if (part.matches("[()\\+\\-\\*/<>!]=?|&&|\\|\\|")) { // Operators and parentheses
-                tokens.add(part);
+    //     while (sc.hasNext()) {
+    //         String part = sc.next().trim();
+    //         if (part.matches("\\d+")) { // Numbers
+    //             System.out.println(part);
+    //             tokens.add(part);
+    //         }
+    //         else if (part.matches("[()\\+\\-\\*/<>!]=?|&&|\\|\\|")) { // Operators and parentheses
+    //             System.out.println(part);
+    //             tokens.add(part);
+    //         }
+    //     }
+
+    //     return tokens;
+    // }
+
+    public static List<String> tokenize(String expression){
+        List<String> tokens = new ArrayList<>();
+        String[] toke = expression.split(" ");
+        for(String tok : toke){
+            if (tok.matches("[()\\+\\-\\^\\*/<>!]=?|&&|\\|\\|")) { // Operators and parentheses
+                // System.out.println(tok);
+                tokens.add(tok);
+            }
+            else if(Integer.parseInt(tok) >= 0 || Integer.parseInt(tok) < 0){
+                // System.out.println(tok);
+                tokens.add(tok);
             }
         }
-
         return tokens;
     }
 
@@ -92,6 +119,7 @@ public class InfixEvaluator {
             case "-": return leftOperand - rightOperand;
             case "*": return leftOperand * rightOperand;
             case "/": return leftOperand / rightOperand;
+            case "^": return (poww(leftOperand,  rightOperand));
             case "==": return leftOperand == rightOperand ? 1 : 0;
             case "!=": return leftOperand != rightOperand ? 1 : 0;
             case "<": return leftOperand < rightOperand ? 1 : 0;
@@ -107,6 +135,9 @@ public class InfixEvaluator {
     // Evaluate the infix expression
     public static int evaluateInfixExpression(String expression) {
         List<String> tokens = tokenize(expression);
+        // for(String token : tokens){
+        //     System.out.println(token);
+        // }
         Stack<Integer> operandStack = new StackImpl<>();
         Stack<String> operatorStack = new StackImpl<>();
 
@@ -149,7 +180,7 @@ public class InfixEvaluator {
     }
 
     public static void main(String[] args) {
-        String expression = "10 / 2 + 5";
+        String expression = "2 + 3 * 5 + 50 / 5 ^ 2";
         System.out.println("Result: " + evaluateInfixExpression(expression)); // Test evaluation
     }
 }
