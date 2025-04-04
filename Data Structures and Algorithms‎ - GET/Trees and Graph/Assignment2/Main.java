@@ -10,5 +10,8 @@ public class Main {
         System.out.println("Peek: " + pq.peek()); 
         System.out.println("Removed: " + pq.remove()); 
         System.out.println("Peek: " + pq.peek()); 
+        System.out.println("Removed: " + pq.remove()); 
+        System.out.println("Peek: " + pq.peek()); 
+
     }
 }
