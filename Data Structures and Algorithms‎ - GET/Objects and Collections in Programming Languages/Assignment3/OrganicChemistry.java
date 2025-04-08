@@ -23,16 +23,12 @@ public class OrganicChemistry {
                     i++;
                 }
 
-                System.out.println("New Weight" + newWeight);
-
                 if(i < arr.length && arr[i + 1] >= '0' && arr[i + 1] <= '9'){
                     newWeight = newWeight * (arr[i+1] - '0');
-                    
                     i++;
                 }
                 
                 weight += newWeight;
-                System.out.println("new Weight " + weight);
             }
 
 
@@ -46,6 +42,10 @@ public class OrganicChemistry {
                 }
             }
             
+        }
+
+        if(arr[arr.length - 1] != ')' && (arr[arr.length - 1] == 'C' || arr[arr.length - 1] == 'H' || arr[arr.length - 1] =='O')){
+            weight += formula.get(arr[arr.length - 1]);
         }
 
         System.out.println("The Molecular Weight of formula " + input + " is :- " + weight);
