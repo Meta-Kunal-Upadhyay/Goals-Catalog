@@ -17,6 +17,7 @@ public class uniqueCharacters {
         uniqueChar.add(c);
        }
 
+
        int count = uniqueChar.size();
        cache.put(str, count);
 
