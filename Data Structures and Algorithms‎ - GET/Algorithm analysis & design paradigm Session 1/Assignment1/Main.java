@@ -36,6 +36,6 @@ public class Main {
         dict.delete("banana");
 
         System.out.println("All sorted: " + dict.getSortedList());
-        System.out.println("Range [apple, cherry]: " + dict.getRange("apple", "cherry"));
+        System.out.println("Range [apple, cherry]: " + dict.getRange("apple", "date"));
     }
 }

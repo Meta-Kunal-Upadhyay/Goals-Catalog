@@ -83,11 +83,11 @@ public class Main {
     public static void main(String[] args) {
         EmployeeLinkedList list = new EmployeeLinkedList();
 
-        list.add("Alice", 30, 70000);
-        list.add("Bob", 25, 90000);
-        list.add("Charlie", 28, 70000);
-        list.add("David", 40, 90000);
-        list.add("Eve", 22, 70000);
+        list.add("Muskan", 19, 70000);
+        list.add("Kunal", 21, 90000);
+        list.add("Prateek", 23, 70000);
+        list.add("Prakshat", 22, 90000);
+        list.add("Pankaj", 28, 70000);
 
         System.out.println("Before Sorting:");
         list.printList();
