@@ -102,8 +102,8 @@ class EmployeeLinkedList {
     private int compareEmployees(Employee e1, Employee e2) {
         if (e1.salary < e2.salary) return -1;  // Lower salary comes first
         if (e1.salary > e2.salary) return 1;   // Higher salary comes later
-        if (e1.age < e2.age) return -1;        // Younger age comes first
-        if (e1.age > e2.age) return 1;         // Older age comes later
+        if (e1.age > e2.age) return -1;        // Younger age comes first
+        if (e1.age < e2.age) return 1;         // Older age comes later
         return 0;                              // Equal salary and age
     }
 
