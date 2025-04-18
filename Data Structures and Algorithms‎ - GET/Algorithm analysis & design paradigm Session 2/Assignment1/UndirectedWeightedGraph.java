@@ -8,7 +8,7 @@ public class UndirectedWeightedGraph implements Graph {
         adjList.putIfAbsent(v, new ArrayList<>());
         adjList.get(u).add(new Edge(u, v, w));
         adjList.get(v).add(new Edge(v, u, w));
-    }
+    }   
 
     @Override
     public boolean isConnected() {
