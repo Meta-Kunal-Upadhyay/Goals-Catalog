@@ -1,6 +1,5 @@
 1. Stored Procedure to retrieve average sales of each product in a given month and year
 
-DELIMITER $$ 
 CREATE PROCEDURE GetAverageSalesPerProduct(IN month_input INT, IN year_input INT) 
 BEGIN 
     SELECT oi.product_id, 
@@ -10,18 +9,18 @@ BEGIN
     WHERE MONTH(o.order_date) = month_input AND YEAR(o.order_date) = year_input 
     GROUP BY oi.product_id; 
 END $$ 
-DELIMITER ; 
+
 
 
 2.  Stored Procedure to retrieve order details with validation on input dates
 
-
-DELIMITER $$  
+ 
 CREATE PROCEDURE GetOrderDetails(IN start_date DATE, IN end_date DATE)  
 BEGIN  
     DECLARE validated_start DATE;  
     DECLARE validated_end DATE;  
- 
+
+    -- Validate if start date is greater than end date  
     IF start_date > end_date THEN  
         SET validated_start = DATE_FORMAT(start_date, '%Y-%m-01'); -- Set to first day of the month  
         SET validated_end = end_date;  
@@ -29,9 +28,9 @@ BEGIN
         SET validated_start = start_date;  
         SET validated_end = end_date;  
     END IF;  
- 
+
+    -- Retrieve orders within the validated period  
     SELECT order_id, user_id, order_date, total_amount, order_status  
     FROM Orders  
     WHERE order_date BETWEEN validated_start AND validated_end;  
-END $$  
-DELIMITER ;  
+END 
