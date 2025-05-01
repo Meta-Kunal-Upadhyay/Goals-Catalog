@@ -380,17 +380,6 @@ input, select, textarea {
   border-color: green;
 }
 
-label {
-  display: block;
-  margin-bottom: 8px;
-  font-size: 18px;
-}
-
-.label-box {
-  display: flex;
-  justify-content: space-between;
-  padding-left: 20px;
-}
 .final-message {
   font-weight: bold;
   color: green;

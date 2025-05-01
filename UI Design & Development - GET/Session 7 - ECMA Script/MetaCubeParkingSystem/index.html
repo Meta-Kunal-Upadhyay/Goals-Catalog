@@ -47,8 +47,8 @@
     <div class="content">
         <div class="content-box">
             <div class="label-box">
-                <label id="label">Enter your name:</label>
-                <input id="inputField" type="text" placeholder="Full Name" />
+              <label id="label">Enter your name:</label>
+              <input id="inputField" type="text" placeholder="Full Name" />
             </div>
           
             <div id="genderField" class="hidden">
@@ -60,7 +60,7 @@
           
             <div id="finalMessage" class="final-message hidden">
               Registration successful! Your ID is <span id="regId"></span>
-            </div>
+            </div>            
         </div>
     </div>
 
@@ -77,24 +77,26 @@
     <div class="content">
         <div class="content-box">
             <div id="vehicleForm" class="hidden">
-                <label id="vehicleLabel">Enter your vehicle name:</label>
-                <input id="vehicleInput" type="text" placeholder="Vehicle Name" />
-              </div>
+              <label id="vehicleLabel">Enter vehicle name:</label>
+              <input id="vehicleInput" type="text" placeholder="Vehicle Name" />
+            </div>
             
-              <div id="passSection" class="hidden">
-                <label>Select a pass type:</label>
-                <select id="passType">
-                  <option value="">-- Select --</option>
-                </select>
-                <div class="currency-btns">
-                  <label>Select Currency:</label><br/>
-                  <button onclick="setCurrency('INR')">INR</button>
-                  <button onclick="setCurrency('USD')">USD</button>
-                  <button onclick="setCurrency('YEN')">YEN</button>
-                </div>
-                <button onclick="showFinalPrice()">Get Pass</button>
-                <p id="finalPrice"></p>
-              </div>
+            <div id="passSection" class="hidden">
+              <label>Select your pass:</label>
+              <select id="passType">
+                <option value="daily">Daily</option>
+                <option value="monthly">Monthly</option>
+                <option value="yearly">Yearly</option>
+              </select>
+              <label>Choose currency:</label>
+              <select id="currency">
+                <option value="USD">USD</option>
+                <option value="INR">INR</option>
+                <option value="YEN">YEN</option>
+              </select>
+              <button id="getPass">Get Pass</button>
+              <div id="passPrice"></div>
+            </div>
         </div>
     </div>
 
