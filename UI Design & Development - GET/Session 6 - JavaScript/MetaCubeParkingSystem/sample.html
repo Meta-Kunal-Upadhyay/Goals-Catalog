@@ -1,148 +1,312 @@
-<div class="content">
-    
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Metacube Parking System</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 40px;
+    }
+    .hidden {
+      display: none;
+    }
+    input, select, textarea {
+      padding: 8px;
+      width: 300px;
+      font-size: 16px;
+      margin-bottom: 20px;
+      border: 2px solid #ccc;
+      border-radius: 5px;
+      outline: none;
+    }
+    .password-weak {
+      border-color: red;
+    }
+    .password-normal {
+      border-color: orange;
+    } 
+    .password-strong {
+      border-color: green;
+    }
+    label {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 18px;
+    }
+    .final-message {
+      font-weight: bold;
+      color: green;
+      font-size: 20px;
+    }
+    .currency-btns button {
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body>
 
+  <label id="label">Enter your name:</label>
+  <input id="inputField" type="text" placeholder="Full Name" />
 
+  <div id="genderField" class="hidden">
+    <label>Hi <span id="userNameSpan"></span>! Can I know your gender?</label>
+    <input type="radio" name="gender" value="Male" /> Male
+    <input type="radio" name="gender" value="Female" /> Female
+    <input type="radio" name="gender" value="Other" /> Other
+  </div>
 
-<button type="button" id = "AddEmployee" class="collapsible">
-    <img class="boxCreate" src="Assests/vehicle.png" alt="Employee"> Add Vehicle
-</button>
+  <div id="finalMessage" class="final-message hidden">
+    Registration successful! Your ID is <span id="regId"></span>
+  </div>
 
+  <div id="vehicleForm" class="hidden">
+    <label id="vehicleLabel">Enter your vehicle name:</label>
+    <input id="vehicleInput" type="text" placeholder="Vehicle Name" />
+  </div>
 
-
-<button type="button" id = "addEmployee" class="collapsible">
-    <img class="boxCreate" src="Assests/feedback.png" alt="Employee"> Give Feedback</button>
-
-    <div class="content">
-        <div class="container mx-auto px-4 py-8 max-w-4xl forms">
-            <!-- Form Card -->
-            <div class="bg-white rounded-xl shadow-md overflow-hidden">
-            <!-- Form Header -->
-            <div class="primary-color p-6">
-                <h2 class="text-xl font-semibold text-white">Employee Details</h2>
-                <p class="text-blue-100 mt-1">Please fill in all required fields</p>
-            </div>
-        
-            <!-- Form Body -->
-            <form class="p-6">
-                <!-- Two Column Layout -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Employee Information -->
-                <div class="space-y-6">
-                    <h3 class="text-lg font-medium text-gray-800 border-b pb-2">Employee Information</h3>
-                    
-                    <div class="space-y-4">
-                    <div>
-                        <label for="employeeName" class="block text-sm font-medium text-gray-700 mb-1">Employee Name *</label>
-                        <input type="text" id="employeeName" name="employeeName" class="block w-full rounded-md border-gray-300 shadow-sm focus:ring-0 primary-color-focus px-4 py-2 border" required>
-                    </div>
-                    
-                    <div>
-                        <label for="employeeId" class="block text-sm font-medium text-gray-700 mb-1">Employee ID *</label>
-                        <input type="text" id="employeeId" name="employeeId" class="block w-full rounded-md border-gray-300 shadow-sm focus:ring-0 primary-color-focus px-4 py-2 border" required>
-                    </div>
-                    
-                    
-                    <div>
-                        <label for="supervisor" class="block text-sm font-medium text-gray-700 mb-1">Supervisor *</label>
-                        <input type="text" id="supervisor" name="supervisor" class="block w-full rounded-md border-gray-300 shadow-sm focus:ring-0 primary-color-focus px-4 py-2 border" required>
-                    </div>
-                    </div>
-                </div>
-                
-                <!-- Leave Details -->
-                <div class="space-y-6">
-                    <h3 class="text-lg font-medium text-gray-800 border-b pb-2">Department Details</h3>
-                    
-                    <div class="space-y-4">
-                    <div>
-                        <label for="leaveType" class="block text-sm font-medium text-gray-700 mb-1">Department *</label>
-                        <select id="leaveType" name="leaveType" class="block w-full rounded-md border-gray-300 shadow-sm focus:ring-0 primary-color-focus px-4 py-2 border" required>
-                            <option value="">Select Department</option>
-                            <option value="hr">Human Resources</option>
-                            <option value="it">Information Technology</option>
-                            <option value="finance">Finance</option>
-                            <option value="operations">Operations</option>
-                            <option value="marketing">Marketing</option>
-                        </select>
-                    </div>
-                    
-                    <div>
-                        <label for="position" class="block text-sm font-medium text-gray-700 mb-1">Position *</label>
-                        <input type="text" id="position" name="position" class="block w-full rounded-md border-gray-300 shadow-sm focus:ring-0 primary-color-focus px-4 py-2 border" required>
-                    </div>
-                    </div>
-                </div>
-                </div>
-                
-                <!-- Reason for Leave -->
-                <!-- <div class="mt-6">
-                <label for="reason" class="block text-sm font-medium text-gray-700 mb-1">Reason for Leave *</label>
-                <textarea id="reason" name="reason" rows="4" class="block w-full rounded-md border-gray-300 shadow-sm focus:ring-0 primary-color-focus px-4 py-2 border" required></textarea>
-                </div> -->
-                
-                <!-- Contact Information -->
-                <div class="mt-6">
-                <h3 class="text-lg font-medium text-gray-800 border-b pb-2">Contact Information</h3>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
-                    <div>
-                    <label for="contactPhone" class="block text-sm font-medium text-gray-700 mb-1">Phone Number *</label>
-                    <input type="tel" id="contactPhone" name="contactPhone" class="block w-full rounded-md border-gray-300 shadow-sm focus:ring-0 primary-color-focus px-4 py-2 border" required>
-                    </div>
-                    
-                    <div>
-                    <label for="contactEmail" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
-                    <input type="email" id="contactEmail" name="contactEmail" class="block w-full rounded-md border-gray-300 shadow-sm focus:ring-0 primary-color-focus px-4 py-2 border">
-                    </div>
-                </div>
-                </div>
-                
-                <!-- Supporting Documents -->
-                <div class="mt-6">
-                <h3 class="text-lg font-medium text-gray-800 border-b pb-2">Supporting Documents</h3>
-                
-                <div class="mt-4">
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Attach Documents (if applicable)</label>
-                    <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
-                    <div class="space-y-1 text-center">
-                        <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
-                        <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                        <div class="flex text-sm text-gray-600">
-                        <label for="file-upload" class="relative cursor-pointer primary-color-text hover:underline font-medium">
-                            <span>Upload a file</span>
-                            <input id="file-upload" name="file-upload" type="file" class="sr-only">
-                        </label>
-                        <p class="pl-1">or drag and drop</p>
-                        </div>
-                        <p class="text-xs text-gray-500">PDF, PNG, JPG up to 10MB</p>
-                    </div>
-                    </div>
-                </div>
-                </div>
-                
-                <!-- Acknowledgment -->
-                <div class="mt-6">
-                <div class="flex items-start">
-                    <div class="flex items-center h-5">
-                    <input id="acknowledgment" name="acknowledgment" type="checkbox" class="focus:ring-0 primary-color-focus h-4 w-4 text-blue-600 border-gray-300 rounded" required>
-                    </div>
-                    <div class="ml-3 text-sm">
-                    <label for="acknowledgment" class="font-medium text-gray-700">I acknowledge that the information provided is accurate and complete *</label>
-                    </div>
-                </div>
-                </div>
-                
-                <!-- Form Actions -->
-                <div class="mt-8 flex justify-end space-x-4">
-                <button type="button" class="py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
-                    Cancel
-                </button>
-                <button type="submit" class="py-2 px-6 border border-transparent rounded-md shadow-sm text-sm font-medium text-white primary-color primary-color-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                    Submit Request
-                </button>
-                </div>
-            </form>
-            </div>
-        </div>
+  <div id="passSection" class="hidden">
+    <label>Select a pass type:</label>
+    <select id="passType">
+      <option value="">-- Select --</option>
+    </select>
+    <div class="currency-btns">
+      <label>Select Currency:</label><br/>
+      <button onclick="setCurrency('INR')">INR</button>
+      <button onclick="setCurrency('USD')">USD</button>
+      <button onclick="setCurrency('YEN')">YEN</button>
     </div>
+    <button onclick="showFinalPrice()">Get Pass</button>
+    <p id="finalPrice"></p>
+  </div>
+
+  <script>
+    let step = 0;
+    const data = {};
+    const label = document.getElementById('label');
+    const input = document.getElementById('inputField');
+    const genderField = document.getElementById('genderField');
+    const userNameSpan = document.getElementById('userNameSpan');
+    const finalMessage = document.getElementById('finalMessage');
+    const vehicleForm = document.getElementById('vehicleForm');
+    const vehicleLabel = document.getElementById('vehicleLabel');
+    const vehicleInput = document.getElementById('vehicleInput');
+    const passSection = document.getElementById('passSection');
+    const passType = document.getElementById('passType');
+    const finalPrice = document.getElementById('finalPrice');
+
+    const pricingUSD = {
+      Cycle: [0.06, 1.2, 6],
+      MotorCycle: [0.12, 2.4, 12],
+      "Four Wheelers": [0.24, 6, 42]
+    };
+
+    let currentCurrency = 'INR';
+    const exchangeRates = { INR: 83, USD: 1, YEN: 156 };
+
+    function convertToCurrency(usd, currency) {
+      return (usd * exchangeRates[currency]).toFixed(2);
+    }
+
+    const isValidName = name => name.length >= 2 && !/\d/.test(name);
+    const isValidEmail = email => email.includes('@') && email.includes('.') && email.length > 5;
+    const isValidPassword = pwd =>
+      /[a-z]/.test(pwd) &&
+      /[A-Z]/.test(pwd) &&
+      /\d/.test(pwd) &&
+      /[A-Za-z0-9]/.test(pwd) &&
+      pwd.length >= 8;
+    const isValidContact = contact => /^\d{9,}$/.test(contact);
+
+    const passwordStrength = (pwd) => {
+      if (pwd.length < 6) return 'weak';
+      if (/[A-Za-z]/.test(pwd) && /\d/.test(pwd) && pwd.length >= 8) return 'strong';
+      return 'normal';
+    };
+
+    const updatePasswordBorder = (strength) => {
+      input.classList.remove('password-weak', 'password-normal', 'password-strong');
+      if (strength === 'weak') input.classList.add('password-weak');
+      else if (strength === 'normal') input.classList.add('password-normal');
+      else if (strength === 'strong') input.classList.add('password-strong');
+    };
+
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && input.value.trim() !== '') {
+        if (step === 0 && isValidName(input.value)) {
+          data.name = input.value;
+          userNameSpan.textContent = data.name.split(" ")[0];
+          input.classList.add('hidden');
+          label.classList.add('hidden');
+          genderField.classList.remove('hidden');
+          step++;
+        }
+      }
+    });
+
+    document.querySelectorAll('input[name="gender"]').forEach(radio => {
+      radio.addEventListener('change', () => {
+        data.gender = radio.value;
+
+        genderField.classList.add('hidden');
+        input.classList.remove('hidden');
+        label.classList.remove('hidden');
+        input.type = 'email';
+        input.placeholder = 'Enter your email';
+        label.textContent = 'Please enter your email address:';
+        input.value = '';
+        step++;
+
+        const handleEmail = (e) => {
+          if (e.key === 'Enter' && isValidEmail(input.value)) {
+            data.email = input.value;
+            input.removeEventListener('keydown', handleEmail);
+
+            input.type = 'password';
+            input.placeholder = 'Enter your password';
+            label.textContent = 'Set your password:';
+            input.value = '';
+            step++;
+
+            input.addEventListener('input', () => {
+              const strength = passwordStrength(input.value);
+              updatePasswordBorder(strength);
+            });
+
+            const handlePassword = (e) => {
+              if (e.key === 'Enter' && isValidPassword(input.value)) {
+                data.password = input.value;
+                input.removeEventListener('keydown', handlePassword);
+                input.classList.remove('password-weak', 'password-normal', 'password-strong');
+
+                input.type = 'password';
+                input.placeholder = 'Confirm password';
+                label.textContent = 'Confirm your password';
+                input.value = '';
+
+                const handleConfirm = (e) => {
+                  if (e.key === 'Enter' && input.value === data.password) {
+                    input.removeEventListener('keydown', handleConfirm);
+
+                    input.type = 'tel';
+                    input.placeholder = 'Enter contact number';
+                    label.textContent = 'Enter your contact number';
+                    input.value = '';
+
+                    const handleContact = (e) => {
+                      if (e.key === 'Enter' && isValidContact(input.value)) {
+                        data.contact = input.value;
+                        input.removeEventListener('keydown', handleContact);
+
+                        input.classList.add('hidden');
+                        label.classList.add('hidden');
+                        finalMessage.classList.remove('hidden');
+                        const empId = 'EMP' + Math.floor(1000 + Math.random() * 9000);
+                        data.empId = empId;
+                        document.getElementById('regId').textContent = empId;
+
+                        // Proceed to vehicle form
+                        vehicleForm.classList.remove('hidden');
+                        vehicleInput.focus();
+
+                        let vehicleStep = 0;
+                        vehicleInput.addEventListener('keydown', function vehicleHandler(e) {
+                          if (e.key === 'Enter' && vehicleInput.value.trim() !== '') {
+                            if (vehicleStep === 0) {
+                              data.vehicleName = vehicleInput.value;
+                              vehicleInput.type = 'select';
+                              vehicleInput.classList.add('hidden');
+                              const select = document.createElement('select');
+                              select.id = 'vehicleType';
+                              ['Cycle', 'MotorCycle', 'Four Wheelers'].forEach(v => {
+                                const opt = document.createElement('option');
+                                opt.value = v;
+                                opt.textContent = v;
+                                select.appendChild(opt);
+                              });
+                              vehicleLabel.textContent = 'Which vehicle do you have?';
+                              vehicleLabel.insertAdjacentElement('afterend', select);
+                              vehicleStep++;
+
+                              select.addEventListener('change', () => {
+                                data.vehicleType = select.value;
+                                select.remove();
+                                vehicleLabel.textContent = 'Enter vehicle number:';
+                                vehicleInput.classList.remove('hidden');
+                                vehicleInput.type = 'text';
+                                vehicleInput.value = '';
+                                vehicleStep++;
+
+                                vehicleInput.addEventListener('keydown', function handleVehicleNum(e) {
+                                  if (e.key === 'Enter' && vehicleInput.value.trim() !== '') {
+                                    data.vehicleNumber = vehicleInput.value;
+                                    vehicleInput.removeEventListener('keydown', handleVehicleNum);
+                                    vehicleInput.value = '';
+                                    vehicleLabel.textContent = 'Any identification for vehicle?';
+                                    vehicleInput.placeholder = 'Details...';
+                                    vehicleStep++;
+
+                                    vehicleInput.addEventListener('keydown', function handleIdent(e) {
+                                      if (e.key === 'Enter' && vehicleInput.value.trim() !== '') {
+                                        data.identification = vehicleInput.value;
+                                        vehicleInput.removeEventListener('keydown', handleIdent);
+                                        vehicleForm.classList.add('hidden');
+                                        passSection.classList.remove('hidden');
+
+                                        ['Daily', 'Monthly', 'Yearly'].forEach((p, idx) => {
+                                          const opt = document.createElement('option');
+                                          opt.value = idx;
+                                          opt.textContent = `${p} - ${convertToCurrency(pricingUSD[data.vehicleType][idx], currentCurrency)} ${currentCurrency}`;
+                                          passType.appendChild(opt);
+                                        });
+                                      }
+                                    });
+                                  }
+                                });
+                              });
+                            }
+                          }
+                        });
+                      }
+                    };
+
+                    input.addEventListener('keydown', handleContact);
+                  }
+                };
+
+                input.addEventListener('keydown', handleConfirm);
+              }
+            };
+
+            input.addEventListener('keydown', handlePassword);
+          }
+        };
+
+        input.addEventListener('keydown', handleEmail);
+      });
+    });
+
+    function setCurrency(currency) {
+      currentCurrency = currency;
+      passType.innerHTML = '<option value="">-- Select --</option>';
+      if (data.vehicleType) {
+        ['Daily', 'Monthly', 'Yearly'].forEach((p, idx) => {
+          const opt = document.createElement('option');
+          opt.value = idx;
+          opt.textContent = `${p} - ${convertToCurrency(pricingUSD[data.vehicleType][idx], currentCurrency)} ${currency}`;
+          passType.appendChild(opt);
+        });
+      }
+    }
+
+    function showFinalPrice() {
+      const selectedIndex = passType.value;
+      if (selectedIndex !== '') {
+        const usdPrice = pricingUSD[data.vehicleType][selectedIndex];
+        finalPrice.textContent = `Your final pass price (in USD): $${usdPrice}`;
+      }
+    }
+  </script>
+</body>
+</html>
