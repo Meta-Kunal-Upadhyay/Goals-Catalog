@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metacube Parking</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="index.css">
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav id="navbar">
+      <img src="Assests/logo.svg" alt="MetacubeLogo" />
+      <div class="links">
+        <a href="#AddEmployee">Add Employee</a>
+        <a href="#addvechicle">Add Vehicle</a>
+        <a href="#GiveFeedback">Give Feedback</a>
+        <a href="#pricing">Pricing</a>
+      </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section id="hero">
+      <div class="hero-content">
+        <h1>Welcome to Metacube Parking</h1>
+        <p>Your one-stop solution for modern parking management.</p>
+      </div>
+      <div class="hero-image">
+        <img src="Assests/major-park-10.png" alt="Parking Illustration" />
+      </div>
+    </section>
+
+    <div class="downImage">
+        <img  src="Assests/Arrow-Down-icon.png" alt="DownImage">
+    </div>
+    <!-- <p class="ScrollClass">Scroll Down</p> -->
+    <br>
+    <br>
+
+
+
+     
+    <button type="button" id = "AddEmployee" class="collapsible">
+        <img class="boxCreate" src="Assests/employeeicon.png" alt="Employee" style="padding-right: 10px;"> Add Employee
+    </button>
+
+    <div class="content">
+        <div class="content-box">
+            <div class="label-box">
+              <label id="label">Enter your name:</label>
+              <input id="inputField" type="text" placeholder="Full Name" />
+            </div>
+          
+            <div id="genderField" class="hidden">
+              <label>Hi <span id="userNameSpan"></span>! Can I know your gender?</label>
+              <input type="radio" name="gender" value="Male" /> Male
+              <input type="radio" name="gender" value="Female" /> Female
+              <input type="radio" name="gender" value="Other" /> Other
+            </div>
+          
+            <div id="finalMessage" class="final-message hidden">
+              Registration successful! Your ID is <span id="regId"></span>
+            </div>            
+        </div>
+    </div>
+
+
+    <br>
+    <br>
+    <br>
+    <br>
+
+
+    <button type="button"  class="newProp collapsible" id = "addvechicle">
+        <img class="boxCreate" src="Assests/vehicle.png" alt="Vehicle"> Add Vehicle
+    </button>
+    <div class="content">
+        <div class="content-box">
+            <div id="vehicleForm" class="hidden">
+              <label id="vehicleLabel">Enter vehicle name:</label>
+              <input id="vehicleInput" type="text" placeholder="Vehicle Name" />
+            </div>
+            
+            <div id="passSection" class="hidden">
+              <label>Select your pass:</label>
+              <select id="passType">
+                <option value="daily">Daily</option>
+                <option value="monthly">Monthly</option>
+                <option value="yearly">Yearly</option>
+              </select>
+              <label>Choose currency:</label>
+              <select id="currency">
+                <option value="USD">USD</option>
+                <option value="INR">INR</option>
+                <option value="YEN">YEN</option>
+              </select>
+              <button id="getPass">Get Pass</button>
+              <div id="passPrice"></div>
+            </div>
+        </div>
+    </div>
+
+
+    
+
+    
+
+
+
+
+<!-- Pricing Section -->
+<p class="heading-price" >Pricing<p>
+
+    <section id="pricing" class="pricing-section">
+        
+        <!-- Cycle Pricing -->
+        <div class="pricing-item">
+            <div class="cardDes">
+                <center>
+                    <h4>Cycle</h4>
+                </center>
+            </div>
+            <p>Daily Price: ₹5</p>
+            <p>Monthly Price: ₹100</p>
+            <p>Yearly Price: ₹500</p>
+            <button class="cardbutton">Purchase</button>
+        </div>
+    
+        <!-- Motorcycle Pricing -->
+        <div class="pricing-item">
+            <div class="cardDes">
+                <center>
+                    <h4>Motorcycle</h4>
+                </center>
+            </div>
+            <p>Daily Price: ₹10</p>
+            <p>Monthly Price: ₹200</p>
+            <p>Yearly Price: ₹1000</p>
+            <button class="cardbutton">Purchase</button>
+        </div>
+    
+        <!-- Four Wheelers Pricing -->
+        <div class="pricing-item">
+            <div class="cardDes">
+                <center>
+                    <h4>Four
+                        Wheeler</h4>
+                </center>
+            </div>
+            <p>Daily Price: ₹20</p>
+            <p>Monthly Price: ₹500</p>
+            <p>Yearly Price: ₹3500</p>
+            <button class="cardbutton">Purchase</button>
+        </div>
+    </section>
+
+
+    
+
+
+    <script src="script.js"></script>
+
+  </body>
+
+</html>
+
+
