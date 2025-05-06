@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Metacube Parking System</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 40px;
+    }
+    .hidden {
+      display: none;
+    }
+    input, select {
+      padding: 8px;
+      width: 300px;
+      font-size: 16px;
+      margin-bottom: 20px;
+      border: 2px solid #ccc;
+      border-radius: 5px;
+      outline: none;
+    }
+    label {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 18px;
+    }
+    .final-message {
+      font-weight: bold;
+      color: green;
+      font-size: 20px;
+    }
+  </style>
+</head>
+<body>
+  <label id="label">Enter your name:</label>
+  <input id="inputField" type="text" placeholder="Full Name"/>
+
+  <div id="genderField" class="hidden">
+    <label>Hi <span id="userNameSpan"></span>! Can I know your gender?</label>
+    <input type="radio" name="gender" value="Male"/> Male
+    <input type="radio" name="gender" value="Female"/> Female
+    <input type="radio" name="gender" value="Other"/> Other
+  </div>
+
+  <div id="finalMessage" class="final-message hidden">
+    Registration successful! Your ID is <span id="regId"></span>
+  </div>
+
+  <div id="vehicleSection" class="hidden">
+    <label id="vehicleLabel">Enter vehicle name:</label>
+    <input id="vehicleInput" type="text" placeholder="Vehicle Name"/>
+  </div>
+
+  <div id="passSection" class="hidden">
+    <label>Select your pass:</label>
+    <select id="passType">
+      <option value="daily">Daily</option>
+      <option value="monthly">Monthly</option>
+      <option value="yearly">Yearly</option>
+    </select>
+    <label>Choose currency:</label>
+    <select id="currency">
+      <option value="USD">USD</option>
+      <option value="INR">INR</option>
+      <option value="YEN">YEN</option>
+    </select>
+    <button id="getPass">Get Pass</button>
+    <div id="passPrice"></div>
+  </div>
+
+  <script type="module" src="script.js"></script>
+</body>
+</html>
