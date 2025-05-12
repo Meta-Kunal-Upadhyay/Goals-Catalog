@@ -32,6 +32,7 @@ const pricingUSD = {
   "Four Wheelers": [0.24, 6, 42],
 };
 
+
 let currentCurrency = "INR";
 const exchangeRates = { INR: 83, USD: 1, YEN: 156 };
 
